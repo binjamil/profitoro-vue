@@ -1,6 +1,6 @@
 export default {
-  workingPomodoro: 25,
-  shortBreak: 5,
+  workingPomodoro: 1 / 30,
+  shortBreak: 1 / 20,
   longBreak: 10,
   pomodorosTillLongBreak: 3
 }
