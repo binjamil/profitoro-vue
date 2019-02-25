@@ -1,7 +1,6 @@
 <template>
   <div class="circle">
     <svg
-      class="timer"
       viewBox="0 0 200 200"
       preserveAspectRatio="xMinYMin meet"
       xmlns="http://www.w3.org/2000/svg"
@@ -14,6 +13,11 @@
   </div>
 </template>
 <script>
+/**
+ * Calculates the x,y coordinates on the circumference for the given angle
+ * @param {number} angle
+ * @returns {object}
+ */
 function calcEndPoint(angle) {
   let x, y
 
@@ -25,7 +29,11 @@ function calcEndPoint(angle) {
     y
   }
 }
-
+/**
+ * Calculates the path attribute for the svg element to draw a circle sector for the given angle
+ * @param {number} angle
+ * @returns {string}
+ */
 function calcPath(angle) {
   let d
   let { x, y } = calcEndPoint(angle)
@@ -36,7 +44,6 @@ function calcPath(angle) {
   }
   return d
 }
-
 export default {
   props: ['angle', 'text'],
   computed: {
@@ -46,40 +53,21 @@ export default {
   }
 }
 </script>
-
 <style scoped lang="scss">
 $big-circle-color: gray;
 $small-circle-color: lightgray;
 $segment-color: darkgray;
 $text-color: black;
-
-.circle {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  padding-bottom: 100%;
-  vertical-align: middle;
-  svg {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-
 .bigCircle {
   fill: $big-circle-color;
 }
-
 .smallCircle {
   fill: $small-circle-color;
 }
-
 .segment {
   fill: $segment-color;
   opacity: 0.6;
 }
-
 .text {
   font-size: 1em;
   stroke-width: 0;
