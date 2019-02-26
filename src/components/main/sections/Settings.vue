@@ -49,15 +49,7 @@ export default {
     SetTimer
   },
   methods: {
-    ...mapActions([
-      'setWorkingPomodoro',
-      'setShortBreak',
-      'setLongBreak',
-      'bindConfig'
-    ])
-  },
-  created() {
-    this.bindConfig()
+    ...mapActions(['setWorkingPomodoro', 'setShortBreak', 'setLongBreak'])
   }
 }
 </script>

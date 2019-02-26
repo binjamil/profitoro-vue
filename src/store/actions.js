@@ -12,6 +12,7 @@ export default {
       commit('setWorkingPomodoro', workingPomodoro)
     }
   },
+
   setShortBreak({ commit, state }, shortBreak) {
     if (!shortBreak) {
       return
@@ -23,6 +24,7 @@ export default {
       commit('setShortBreak', shortBreak)
     }
   },
+
   setLongBreak({ commit, state }, longBreak) {
     if (!longBreak) {
       return
@@ -34,14 +36,51 @@ export default {
       commit('setLongBreak', longBreak)
     }
   },
+
   updateTotalPomodoros({ state }, totalPomodoros) {
     console.log(totalPomodoros)
-    state.statisticsRef.update({ totalPomodoros: totalPomodoros })
+    state.statisticsRef.update({ totalPomodoros })
   },
+
+  createUser({ state }, { email, password }) {
+    state.firebaseApp
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch(error => {
+        console.log(error.code, error.message)
+      })
+  },
+
+  authenticate({ state }, { email, password }) {
+    state.firebaseApp.auth().signInWithEmailAndPassword(email, password)
+  },
+
+  authenticateAnonymous({ state }) {
+    state.firebaseApp
+      .auth()
+      .signInAnonymously()
+      .catch(error => {
+        console.log(error.code, error.message)
+      })
+  },
+
+  logout({ state }) {
+    state.firebaseApp.auth().signOut()
+  },
+
   bindConfig: firebaseAction(({ bindFirebaseRef, state }) => {
-    bindFirebaseRef('config', state.configRef)
+    if (state.user && !state.isAnonymous) {
+      bindFirebaseRef('config', state.configRef)
+    }
   }),
   bindStatistics: firebaseAction(({ bindFirebaseRef, state }) => {
-    bindFirebaseRef('statistics', state.statisticsRef)
-  })
+    if (state.user && !state.isAnonymous) {
+      bindFirebaseRef('statistics', state.statisticsRef)
+    }
+  }),
+  bindAuth({ commit, state }) {
+    state.firebaseApp.auth().onAuthStateChanged(user => {
+      commit('setUser', user)
+    })
+  }
 }

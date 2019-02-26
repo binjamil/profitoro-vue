@@ -66,7 +66,7 @@ export default {
     CountDownTimer
   },
   methods: {
-    ...mapActions(['updateTotalPomodoros', 'bindStatistics']),
+    ...mapActions(['updateTotalPomodoros']),
     togglePomodoro() {
       beep()
       // toggle working state
@@ -87,9 +87,6 @@ export default {
         this.pomodoros % this.config.pomodorosTillLongBreak === 0
       this.isShortBreak = !this.isLongBreak
     }
-  },
-  created() {
-    this.bindStatistics()
   }
 }
 </script>
