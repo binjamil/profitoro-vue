@@ -2,30 +2,30 @@
   <div class="container">
     <div class="row justify-content-center">
       <div v-show="!isWorking" class="col-sm-12 col-md-6 col-lg-4">
-        <div class="card" style="width: 18rem;">
-          <img
-            class="card-img-top"
-            src="../../../assets/Plank.jpg"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Plank</h5>
-            <p class="card-text">Lorem ipsum</p>
+        <div class="jumbotron text-center">
+          <div class="container">
+            <img
+              class="img-fluid rounded"
+              src="../../../assets/Plank.jpg"
+              alt
+            />
+            <h2>Push-ups</h2>
+            <p class="lead">Description: lorem ipsum</p>
           </div>
         </div>
       </div>
-      <count-down-timer
-        class="col-sm-12 col-md-6 col-lg-8"
-        @finished="togglePomodoro"
-        :time="time"
-      ></count-down-timer>
+      <div class="col-sm-12 col-md-6 col-lg-8">
+        <count-down-timer
+          @finished="togglePomodoro"
+          :time="time"
+        ></count-down-timer>
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 import CountDownTimer from './timer/CountDownTimer'
-import config from '../../../config'
+import { mapGetters, mapActions } from 'vuex'
 
 // courtesy of https://stackoverflow.com/a/23395136
 function beep() {
@@ -45,15 +45,18 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      config: 'getConfig',
+      totalPomodoros: 'getTotalPomodoros'
+    }),
     time() {
       let minutes
-
       if (this.isWorking) {
-        minutes = config.workingPomodoro
+        minutes = this.config.workingPomodoro
       } else if (this.isShortBreak) {
-        minutes = config.shortBreak
+        minutes = this.config.shortBreak
       } else if (this.isLongBreak) {
-        minutes = config.longBreak
+        minutes = this.config.longBreak
       }
 
       return minutes * 60
@@ -63,9 +66,10 @@ export default {
     CountDownTimer
   },
   methods: {
+    ...mapActions(['updateTotalPomodoros', 'bindStatistics']),
     togglePomodoro() {
       beep()
-      // toggle the working state
+      // toggle working state
       this.isWorking = !this.isWorking
 
       // reset break states
@@ -78,11 +82,15 @@ export default {
 
       // we have switched to the break state, increase the number of pomodoros and choose between long and short break
       this.pomodoros++
-      this.isLongBreak = this.pomodoros % config.pomodorosTillLongBreak === 0
+      this.updateTotalPomodoros(this.totalPomodoros + 1)
+      this.isLongBreak =
+        this.pomodoros % this.config.pomodorosTillLongBreak === 0
       this.isShortBreak = !this.isLongBreak
     }
+  },
+  created() {
+    this.bindStatistics()
   }
 }
 </script>
-
-<style scoped lang="sass"></style>
+<style scoped lang="scss"></style>

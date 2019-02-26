@@ -1,11 +1,19 @@
 <template>
-  <div>Statistics</div>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Statistics</h1>
+      <p>Total Pomodoros: {{ totalPomodoros }}</p>
+    </div>
+  </div>
 </template>
 <script>
-  export default {
-
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({
+      totalPomodoros: 'getTotalPomodoros'
+    })
   }
+}
 </script>
-<style scoped lang="sass">
-
-</style>
+<style scoped lang="scss"></style>
