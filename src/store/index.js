@@ -22,9 +22,9 @@ let statisticsRef = db.ref('/statistics/test')
 export default new Vuex.Store({
   state: {
     ...state,
-    firebaseApp,
     configRef,
-    statisticsRef
+    statisticsRef,
+    firebaseApp
   },
   getters,
   mutations: {

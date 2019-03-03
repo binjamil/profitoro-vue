@@ -1,6 +1,6 @@
-//store/getters.js
 export default {
   getConfig: state => state.config,
-  getTotalPomodoros: state => state.statistics.totalPomodoros,
-  getUSer: state => state.user
+  getUser: state => state.user,
+  getDisplayName: state => state.displayName,
+  getTotalPomodoros: state => state.statistics.totalPomodoros
 }

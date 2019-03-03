@@ -6,6 +6,9 @@ const config = {
 }
 
 const user = null
+const configRef = null
+const statisticsRef = null
+const displayName = ''
 
 const statistics = {
   pomodorosToday: 0,
@@ -20,7 +23,9 @@ const statistics = {
 
 export default {
   config,
-  statistics,
   user,
-  isAnonymous: false
+  configRef,
+  statisticsRef,
+  statistics,
+  displayName
 }

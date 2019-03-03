@@ -1,4 +1,3 @@
-//store/mutations.js
 export default {
   setWorkingPomodoro(state, workingPomodoro) {
     state.config.workingPomodoro = workingPomodoro
@@ -11,6 +10,14 @@ export default {
   },
   setUser(state, value) {
     state.user = value
-    state.isAnonymous = value.isAnonymous
+  },
+  setConfigRef(state, value) {
+    state.configRef = value
+  },
+  setStatisticsRef(state, value) {
+    state.statistiscRef = value
+  },
+  setDisplayName(state, value) {
+    state.displayName = value
   }
 }
