@@ -10,4 +10,9 @@ export default {
   router
 }
 </script>
-<style scoped lang="scss"></style>
+<style scoped>
+.container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+</style>
