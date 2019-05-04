@@ -1,7 +1,22 @@
 <template>
-  <div>Logo</div>
+  <router-link to="/">
+    <img class="logo" :src="src" alt="ProFitOro" />
+  </router-link>
 </template>
 <script>
-export default {}
+import router from '@/router'
+
+export default {
+  data() {
+    return {
+      src: require('@/assets/profitoro_logo.svg')
+    }
+  },
+  router
+}
 </script>
-<style scoped lang="sass"></style>
+<style>
+.logo {
+  max-width: 100%;
+}
+</style>

@@ -45,7 +45,7 @@ export default {
     return {
       displayName: '',
       email: '',
-      photoURL: 'img/tomato.png',
+      photoURL: require('@/assets/tomato.png'),
       showChangeProfilePicInput: false
     }
   },

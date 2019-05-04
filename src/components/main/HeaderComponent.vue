@@ -1,35 +1,116 @@
 <template>
   <div>
-    <div class="row">
-      <div class="row col-5 offset-7">
-        <div class="col">
-          <p>
-            Welcome
-            <span>{{ name }}</span>
-          </p>
-        </div>
-        <div class="col">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="navbar-brand">
+        <router-link to="/">
+          <img
+            src="../../assets/profitoro_logo.svg"
+            alt="ProFitOro"
+            width="60"
+            class="d-inline-block align-top"
+          />
+        </router-link>
+      </div>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarHeader"
+        aria-controls="navbarHeader"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarHeader">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              :class="{ disabled: isAnonymous }"
+              :to="settingsPath"
+              >Settings</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              :class="{ disabled: isAnonymous }"
+              :to="statisticsPath"
+              >Statistics</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              :class="{ disabled: isAnonymous }"
+              :to="workoutsPath"
+              >Workouts</router-link
+            >
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
           <button
-            class="btn btn-large btn-outline-secondary rounded-0"
-            @click="logout"
+            v-if="!isAnonymous"
+            class="btn btn-secondary"
+            @click="onLogout"
           >
             Logout
           </button>
-        </div>
+          <button
+            v-if="isAnonymous"
+            class="btn btn-secondary"
+            @click="onLogout"
+          >
+            Go to the start page
+          </button>
+        </form>
       </div>
-    </div>
+    </nav>
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
+import router from '@/router'
+import Logo from '@/components/common/Logo'
 
 export default {
   computed: {
-    ...mapGetters({ name: 'getDisplayName' })
+    ...mapGetters({ name: 'getDisplayName' }),
+    ...mapState(['user']),
+    isAnonymous() {
+      return this.user && this.user.isAnonymous
+    },
+    settingsPath() {
+      return this.isAnonymous ? '/' : 'settings'
+    },
+    statisticsPath() {
+      return this.isAnonymous ? '/' : 'statistics'
+    },
+    workoutsPath() {
+      return this.isAnonymous ? '/' : 'workouts'
+    }
   },
   methods: {
-    ...mapActions(['logout'])
+    ...mapActions(['logout']),
+    onLogout() {
+      this.logout()
+      router.push('/')
+    }
+  },
+  router,
+  components: {
+    Logo
   }
 }
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+button {
+  cursor: pointer;
+}
+</style>

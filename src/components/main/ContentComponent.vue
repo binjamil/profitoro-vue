@@ -1,18 +1,13 @@
 <template>
   <div class="container">
-    <pomodoro-timer></pomodoro-timer>
-    <statistics></statistics>
-    <settings></settings>
+    <router-view></router-view>
   </div>
 </template>
 <script>
-import { PomodoroTimer, Settings, Statistics } from './sections'
+import router from '@/router'
+
 export default {
-  components: {
-    PomodoroTimer,
-    Settings,
-    Statistics
-  }
+  router
 }
 </script>
 <style scoped lang="scss"></style>
