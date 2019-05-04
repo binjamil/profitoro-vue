@@ -8,7 +8,7 @@ ProFitOro's backend database is powered by Google Firebase. It is also hosted on
 
 ## Note
 
-While the major portions of the app are ready, some features are still lacking:
+While the major portions of the app are ready, some features are still lacking. Reach out to me if you need to know when these features will be ready for production.
 
 1. Personalization of workouts
 2. Styling the UI
