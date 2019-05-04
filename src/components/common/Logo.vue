@@ -18,5 +18,6 @@ export default {
 <style>
 .logo {
   max-width: 100%;
+  height: 100px;
 }
 </style>

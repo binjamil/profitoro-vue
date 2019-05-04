@@ -26,4 +26,8 @@ export default {
 }
 </script>
 
-<style scoped lang="sass"></style>
+<style scoped>
+.container {
+  margin-top: 1rem;
+}
+</style>
