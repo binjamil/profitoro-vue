@@ -1,39 +1,14 @@
-# profitoro
+# ProFitOro
 
-## Project setup
-```
-npm install
-```
+ProFitOro is a Vue app that implements an effective time-management technique known as Pomodoro.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+While there are many implementations of Pomodoro timer, ProFitOro stands out for one particular reason. ProFitOro will not only solve a time-management problem, but also solve a fitness-management issue. During the breaks, the app will tell you to perform simple workouts. Registered users can also personalize their workouts, timer controls and see statistics.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+ProFitOro's backend database is powered by Google Firebase. It is also hosted on the same platform. You can regularly use ProFitOro to manange both your time and fitness. Here is the link:
 
-### Run your tests
-```
-npm run test
-```
+## Note
 
-### Lints and fixes files
-```
-npm run lint
-```
+While the major portions of the app are ready, some features are still lacking:
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. Personalization of workouts
+2. Styling the UI
